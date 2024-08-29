@@ -6,11 +6,11 @@ USER root
 RUN yum install -y maven && yum clean all
 
 # Switch to the root directory
-# RUN mkdir -p /opt/app-root/src
-WORKDIR /tmp
+RUN mkdir -p /opt/app-root/src
+WORKDIR /opt/app-root/src
 
 # Copy the source code into the container
-COPY ./*.jpg  /tmp/
+# COPY ./*.jpg  /tmp/
 
 # Build the application using Maven
 RUN mvn clean package -DskipTests
