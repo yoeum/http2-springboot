@@ -6,7 +6,7 @@ USER root
 RUN yum install -y maven && yum clean all
 
 # Switch to the root directory
-WORKDIR /opt/app-root/src
+# WORKDIR /opt/app-root/src
 
 # Copy the source code into the container
 COPY ./*.jpg  /tmp/.
