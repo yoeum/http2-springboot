@@ -20,10 +20,11 @@ public class FileController {
         // 파일명을 콘솔에 로깅
         System.out.println("Requested file: " + file);
 
-        File requestedFile = new File(file);  // 애플리케이션과 같은 디렉토리에서 파일을 찾음
+        // /tmp 디렉토리에서 파일을 찾도록 설정
+        File requestedFile = new File("/tmp", file);
 
         if (!requestedFile.exists() || requestedFile.isDirectory()) {
-            System.out.println("File not found or is a directory: " + file);  // 에러 로그 추가
+            System.out.println("File not found or is a directory: " + requestedFile.getAbsolutePath());  // 에러 로그 추가
             return ResponseEntity.notFound().build();
         }
 
