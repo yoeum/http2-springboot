@@ -36,4 +36,9 @@ public class FileController {
                 .contentType(MediaType.APPLICATION_OCTET_STREAM)
                 .body(resource);
     }
+      // /hello URL을 요청하면 "hi"를 응답
+    @GetMapping("/hello")
+    public String sayHello() {
+        return "hi";
+    }
 }
