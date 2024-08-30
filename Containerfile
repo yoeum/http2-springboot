@@ -26,4 +26,4 @@ EXPOSE 8080
 
 
 # Run the application
-CMD ["java", "-Djava.net.preferIPv4Stack=true", "-Dserver.port=8080", "-Dserver.http2.enabled=true", "-Dserver.ssl.enabled=false", "-jar", "target/h2c-example-0.0.1-SNAPSHOT.jar"]
+CMD ["java", "-Djava.net.preferIPv4Stack=true", "-Dserver.port=8080", "-Dserver.http2.enabled=true", "-Dserver.ssl.enabled=false", "-jar", "target/h2c-example-0.0.1-SNAPSHOT.jar","-Dyoeum=name"]
