@@ -14,10 +14,11 @@ RUN mvn clean package -DskipTests
 EXPOSE 8080
 
 # Switch to the root directory
-RUN mkdir -p /opt/app-root/src
-WORKDIR /opt/app-root/src
+#RUN mkdir -p /opt/app-root/src
+#WORKDIR /opt/app-root/src
 
 # Copy the source code into the container
+RUN echo "Current directory during build:" && pwd
 COPY .  /tmp/
 # Run the application
 CMD ["java", "-Djava.net.preferIPv4Stack=true", "-Dserver.port=8080", "-Dserver.http2.enabled=true", "-Dserver.ssl.enabled=false", "-jar", "target/h2c-example-0.0.1-SNAPSHOT.jar"]
