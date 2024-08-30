@@ -1,3 +1,4 @@
+RUN echo "Container v1.0"
 # Use Red Hat UBI as the base image with OpenJDK 17
 FROM registry.access.redhat.com/ubi9/openjdk-17
 
