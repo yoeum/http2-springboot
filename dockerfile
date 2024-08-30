@@ -1,10 +1,10 @@
 
 # Use Red Hat UBI as the base image with OpenJDK 17
 FROM registry.access.redhat.com/ubi9/openjdk-17
+RUN echo "Inspecting environment..." && sleep 30
 
 RUN sh -c "echo 'Current directory:' && pwd && ls -al"
 
-RUN echo "yoeum Container v1.0" && ls -al
 # Install Maven for building the application
 USER root
 RUN yum install -y maven && yum clean all
