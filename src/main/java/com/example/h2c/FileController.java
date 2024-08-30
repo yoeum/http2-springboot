@@ -15,26 +15,18 @@ import java.io.IOException;
 @RestController
 public class FileController {
 
-    @GetMapping("/download")
-    public ResponseEntity<InputStreamResource> downloadFile(@RequestParam String file) throws IOException {
-        // 파일명을 콘솔에 로깅
-        System.out.println("Requested file: " + file);
+   @GetMapping("/download")
+    public void downloadFile(@RequestParam String file, HttpServletResponse response) throws IOException {
+        // 파일 경로 지정 (예: images/image1.jpg)
+        ClassPathResource imgFile = new ClassPathResource(file);
 
-        // /tmp 디렉토리에서 파일을 찾도록 설정
-        File requestedFile = new File("/tmp", file);
-
-        if (!requestedFile.exists() || requestedFile.isDirectory()) {
-            System.out.println("File not found or is a directory: " + requestedFile.getAbsolutePath());  // 에러 로그 추가
-            return ResponseEntity.notFound().build();
+        response.setContentType("image/jpeg");
+        try (InputStream in = imgFile.getInputStream()) {
+            IOUtils.copy(in, response.getOutputStream());
+        } catch (IOException e) {
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            response.getWriter().write("File Not Found");
         }
-
-        FileInputStream fileInputStream = new FileInputStream(requestedFile);
-        InputStreamResource resource = new InputStreamResource(fileInputStream);
-
-        return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + requestedFile.getName() + "\"")
-                .contentType(MediaType.APPLICATION_OCTET_STREAM)
-                .body(resource);
     }
       // /hello URL을 요청하면 "hi"를 응답
     @GetMapping("/hello")
