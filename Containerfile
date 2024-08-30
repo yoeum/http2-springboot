@@ -5,12 +5,7 @@ FROM registry.access.redhat.com/ubi9/openjdk-17
 USER root
 RUN yum install -y maven && yum clean all
 
-# Switch to the root directory
-RUN mkdir -p /opt/app-root/src
-WORKDIR /opt/app-root/src
 
-# Copy the source code into the container
-# COPY ./*.jpg  /tmp/
 
 # Build the application using Maven
 RUN mvn clean package -DskipTests
@@ -18,5 +13,11 @@ RUN mvn clean package -DskipTests
 # Expose the port the application will run on
 EXPOSE 8080
 
+# Switch to the root directory
+RUN mkdir -p /opt/app-root/src
+WORKDIR /opt/app-root/src
+
+# Copy the source code into the container
+COPY ./*.jpg  /tmp/
 # Run the application
 CMD ["java", "-Djava.net.preferIPv4Stack=true", "-Dserver.port=8080", "-Dserver.http2.enabled=true", "-Dserver.ssl.enabled=false", "-jar", "target/h2c-example-0.0.1-SNAPSHOT.jar"]
